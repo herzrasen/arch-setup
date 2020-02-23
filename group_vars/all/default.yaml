@@ -1,0 +1,16 @@
+chroot: /mnt
+pacstrap_packages:
+  - base
+  - base-devel
+  - linux 
+  - linux-firmware
+  - connman
+  - neovim
+user: dennis
+hostname: greenwell
+timezone: Europe/Berlin
+locale: en_US.UTF-8
+keymap: de-latin1
+x11_keyboard_layout: de
+x11_keyboard_variant: nodeadkeys
+

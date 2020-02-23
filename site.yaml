@@ -1,0 +1,20 @@
+- name: Base installation
+  connection: local
+  hosts: localhost
+  tags: [never, base]
+  roles: 
+    - role: pacstrap
+
+- name: System configuration
+  connection: local
+  hosts: localhost
+  tags:
+    - config
+  roles:
+    - role: hostname
+    - role: hosts
+    - role: locale
+    - role: yay
+      tags: yay
+    - role: zsh
+      tags: zsh

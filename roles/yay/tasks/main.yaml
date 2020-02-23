@@ -1,0 +1,24 @@
+- name: Install Git
+  pacman:
+    name: git
+    state: present
+
+- name: Check if yay is installed
+  command: pacman -Q yay
+  register: yay_installed
+
+- name: Clone yay Git repository
+  git:
+    repo: 'https://aur.archlinux.org/yay.git'
+    dest: '/tmp/yay'
+  become: yes
+  become_user: "{{ user }}"
+  when: yay_installed.rc != 0
+
+- name: Build yay
+  command: makepkg -si --needed --rmdeps --noconfirm
+  args:
+    chdir: /tmp/yay
+  become: yes
+  become_user: "{{ user }}"
+  when: yay_installed.rc != 0

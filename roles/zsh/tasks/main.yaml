@@ -1,0 +1,19 @@
+- name: Install zsh
+  pacman:
+    name: zsh
+    state: present
+
+- name: Create temporary directory for ohmyzsh installer
+  file:
+    path: /tmp/ohmyzsh
+    state: directory
+    mode: 0755
+
+- name: Download ohmyzsh
+  uri:
+    url: https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+    dest: /tmp/ohmyzsh/install.sh
+    mode: "u=rwx,g=r,o=r"
+
+- name: Install ohmyzsh
+  command: sh -c /tmp/ohmyzsh/install.sh

@@ -1,0 +1,3 @@
+- name: Parse the 'LANG' from the current configuration
+  set_fact:
+    locale_lang: "{{ locale_status.stdout | regex_search('LANG=([^\n]+)', '\\1') | first }}"
