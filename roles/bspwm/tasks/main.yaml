@@ -1,0 +1,13 @@
+- name: Install packages
+  pacman:
+    name:
+      - bspwm
+      - sxhkd
+    state: present
+
+- name: Create .xinitrc
+  template:
+    src: ../templates/xinitrc.j2
+    dest: "/home/{{ user }}/.xinitrc"
+  become: yes
+  become_user: "{{ user }}"

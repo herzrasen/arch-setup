@@ -18,3 +18,9 @@
       tags: yay
     - role: zsh
       tags: zsh
+    - role: dotfiles
+      tags: dotfiles
+    - role: xorg
+      tags: xorg
+    - role: bspwm
+      tags: bspwm

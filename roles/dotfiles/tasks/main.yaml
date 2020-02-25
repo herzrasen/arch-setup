@@ -1,0 +1,15 @@
+- name: Install yadm
+  yay:
+    name: yadm
+    state: present
+
+- name: Check if dotfiles are already cloned
+  stat:
+    path: "/home/{{ user }}/.config/yadm/repo.git"
+  register: dotfiles_exist
+
+- name: Checkout dotfiles
+  command: yadm clone "{{ dotfile_repo }}"
+  become: yes
+  become_user: "{{ user }}"
+  when: dotfiles_exist.stat.exists != true

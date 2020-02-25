@@ -1,0 +1,11 @@
+- name: Install Xorg
+  pacman:
+    name:
+      - xorg-server
+      - xorg-xrandr
+      - xorg-xsetroot
+
+- name: Create touchpad configuration
+  template:
+    src: ../templates/30-touchpad.conf.j2
+    dest: /etc/X11/xorg.conf.d/30-touchpad.conf
