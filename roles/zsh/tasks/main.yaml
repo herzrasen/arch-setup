@@ -3,17 +3,39 @@
     name: zsh
     state: present
 
+- name: Get zsh path
+  command: which zsh
+  register: zsh_location
+
+- name: Set {{ zsh_location.stdout }} as default shell for {{ user }}
+  user: 
+    name: "{{ user }}"
+    shell: "{{ zsh_location.stdout }}"
+
 - name: Create temporary directory for ohmyzsh installer
   file:
     path: /tmp/ohmyzsh
     state: directory
+    owner: "{{ user }}"
+    group: "{{ user }}"
     mode: 0755
+
+- name: Test if oh my zsh is installed
+  stat:
+    path: "/home/{{ user }}/.oh-my-zsh"
+  register: ohmyzsh
 
 - name: Download ohmyzsh
   uri:
     url: https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh
     dest: /tmp/ohmyzsh/install.sh
     mode: "u=rwx,g=r,o=r"
+  become: yes
+  become_user: "{{ user }}"
+  when: ohmyzsh.stat.exists == false
 
 - name: Install ohmyzsh
   command: sh -c /tmp/ohmyzsh/install.sh
+  become: yes
+  become_user: "{{ user }}"
+  when: ohmyzsh.stat.exists == false

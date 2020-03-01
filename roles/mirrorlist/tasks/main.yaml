@@ -1,0 +1,11 @@
+- name: Download mirrorlist for {{ country_code }}
+  get_url: 
+    url: "https://www.archlinux.org/mirrorlist?country={{ country_code }}&protocol=https&ip_version=4&use_mirror_status=on"
+    dest: "{{ chroot }}/etc/pacman.d/mirrorlist"
+    backup: yes
+
+- name: Uncomment mirrors
+  replace:
+    path: "{{ chroot }}/etc/pacman.d/mirrorlist" 
+    regexp: '^#(Server = .*)'
+    replace: '\1'

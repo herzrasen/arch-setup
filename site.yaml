@@ -3,6 +3,9 @@
   hosts: localhost
   tags: [never, base]
   roles: 
+    - role: partitions
+    - role: mirrorlist
+      tags: mirrorlist
     - role: pacstrap
 
 - name: System configuration
@@ -16,11 +19,17 @@
     - role: locale
     - role: yay
       tags: yay
+    - role: reflector
+      tags: reflector
     - role: zsh
       tags: zsh
+    - role: fonts
+      tags: fonts
     - role: dotfiles
       tags: dotfiles
     - role: xorg
       tags: xorg
     - role: bspwm
       tags: bspwm
+    - role: packages
+      tags: packages

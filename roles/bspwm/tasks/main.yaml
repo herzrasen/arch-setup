@@ -3,6 +3,10 @@
     name:
       - bspwm
       - sxhkd
+      - polybar
+      - dunst
+      - rofi
+      - picom
     state: present
 
 - name: Create .xinitrc

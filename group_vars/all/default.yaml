@@ -1,4 +1,5 @@
-chroot: /mnt
+device: /dev/sda
+chroot: ""
 pacstrap_packages:
   - base
   - base-devel
@@ -8,6 +9,7 @@ pacstrap_packages:
   - neovim
 user: dennis
 hostname: greenwell
+country_code: DE
 timezone: Europe/Berlin
 locale: en_US.UTF-8
 keymap: de-latin1

@@ -1,0 +1,12 @@
+- name: Install fonts
+  yay:
+    name:
+      - ttf-mononoki
+      - ttf-font-awesome
+      - ttf-anonymous-pro
+      - ttf-material-design-icons
+      - ttf-fira-code
+      - adobe-source-code-pro-fonts
+      - noto-fonts
+      - awesome-terminal-fonts
+    state: present

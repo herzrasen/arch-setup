@@ -1,0 +1,6 @@
+- name: Install additional packages
+  yay:
+    name:
+      - pkghist-bin
+      - firefox
+    state: present
