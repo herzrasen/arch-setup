@@ -39,3 +39,21 @@
 
 - name: Turn swap on
   command: swapon {{ device }}3
+
+- name: Mount {{ device }}2 
+  mount:
+    path: "{{ chroot }}"
+    src: "{{ device }}2"
+    state: mounted
+
+- name: Create {{ chroot }}/boot directory
+  file:
+    path: "{{ chroot }}/boot"
+    state: directory
+    mode: '0755'
+
+- name: Mount {{ device }}1
+  mount: 
+    path: "{{ chroot }}/boot"
+    src: "{{ device }}1"
+    state: mounted

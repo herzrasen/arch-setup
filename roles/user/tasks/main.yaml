@@ -1,0 +1,11 @@
+- name: Create user {{ user }} 
+  user:
+    name: "{{ user }}"
+    password: "{{ password_hash }}"
+    groups: wheel
+    append: yes
+
+- name: Set root password
+  user:
+    name: root
+    password: "{{ password_hash }}"

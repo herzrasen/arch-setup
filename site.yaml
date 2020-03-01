@@ -3,12 +3,15 @@
   hosts: localhost
   tags: [never, base]
   roles: 
+    - role: timedatectl
+      tags: timedatectl
     - role: partitions
+      tags: partitions
     - role: mirrorlist
       tags: mirrorlist
+    - role: pacstrap
     - role: fstab
       tags: fstab
-    - role: pacstrap
 
 - name: System configuration
   connection: local
@@ -17,8 +20,13 @@
     - config
   roles:
     - role: hostname
+      tags: hostname
     - role: hosts
+      tags: hosts
     - role: locale
+      tags: locale
+    - role: user
+      tags: user
     - role: yay
       tags: yay
     - role: reflector
@@ -35,3 +43,13 @@
       tags: bspwm
     - role: packages
       tags: packages
+
+- name: Post-installation
+  connection: local
+  hosts: localhost
+  tags: [never, post-install]
+  roles:
+    - role: initramfs
+      tags: initramfs
+    - role: grub
+      tags: grub

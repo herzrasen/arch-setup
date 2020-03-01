@@ -4,3 +4,16 @@
       - grub
       - efibootmgr
     state: present
+
+- name: Check if grub is already installed
+  stat:
+    path: /boot/EFI/arch/grubx64.efi
+  register: grub
+
+- name: Install bootloader
+  command: grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=arch
+  when: grub.stat.exists == false
+
+- name: Generate grub config
+  command: grub-mkconfig -o /boot/grub/grub.cfg
+  when: grub.stat.exists == false
