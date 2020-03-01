@@ -6,6 +6,8 @@
     - role: partitions
     - role: mirrorlist
       tags: mirrorlist
+    - role: fstab
+      tags: fstab
     - role: pacstrap
 
 - name: System configuration

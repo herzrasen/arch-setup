@@ -1,0 +1,8 @@
+- name: Generate fstab
+  command: genfstab -U {{ chroot }} 
+  register: fstab
+
+- name: Copy result to {{ chroot }}/etc/fstab
+  copy:
+    content: "{{ fstab.stdout }}"
+    dest: /tmp/fstab

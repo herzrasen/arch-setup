@@ -1,0 +1,6 @@
+- name: Install grub and efibootmgr
+  pacman:
+    name:
+      - grub
+      - efibootmgr
+    state: present

@@ -2,3 +2,6 @@
   yay:
     name: reflector
     state: present
+
+- name: Run reflector
+  command: "reflector --sort rate --country {{ country }} --protocol https --save /etc/pacman.d/mirrorlist"

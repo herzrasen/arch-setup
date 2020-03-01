@@ -3,4 +3,11 @@
     name:
       - pkghist-bin
       - firefox
+      - tldr
+      - man-db
+      - man-pages
+      - nodejs
+      - npm
+      - yarn
+      - python
     state: present
