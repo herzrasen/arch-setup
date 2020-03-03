@@ -1,5 +1,5 @@
 - name: Install packages
-  pacman:
+  yay:
     name:
       - bspwm
       - sxhkd

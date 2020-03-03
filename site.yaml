@@ -35,12 +35,12 @@
       tags: zsh
     - role: fonts
       tags: fonts
-    - role: dotfiles
-      tags: dotfiles
     - role: xorg
       tags: xorg
     - role: bspwm
       tags: bspwm
+    - role: dotfiles
+      tags: dotfiles
     - role: packages
       tags: packages
 

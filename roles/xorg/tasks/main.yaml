@@ -3,9 +3,31 @@
     name:
       - xorg-server
       - xorg-xrandr
+      - xorg-xinit
       - xorg-xsetroot
 
 - name: Create touchpad configuration
   template:
     src: ../templates/30-touchpad.conf.j2
     dest: /etc/X11/xorg.conf.d/30-touchpad.conf
+
+- name: Get the current locale
+  command: localectl status
+  register: locale_status
+  changed_when: false
+
+- name: Parse the current LANG from the configuration
+  set_fact:
+    current_locale: "{{ locale_status.stdout | regex_search('LANG=([^\n]+)', '\\1') | first }}"
+
+- name: Parse the current X11 keyboard layout
+  set_fact:
+    current_x11_layout: "{{ locale_status.stdout | regex_search('X11 Layout: ([^\n]+)', '\\1') | first }}"
+
+- name: Parse the current X11 keyboard variant
+  set_fact:
+    current_x11_layout: "{{ locale_status.stdout | regex_search('X11 Model: ([^\n]+)', '\\1') | first }}"
+
+- name: Set the X11 keyboard layout and variant
+  command: localectl set-x11-keymap {{ x11_keyboard_layout }} {{ x11_keyboard_variant }} 
+  when: current_x11_layout != x11_keyboard_layout or current_x11_variant != x11_keyboard_variant

@@ -6,6 +6,7 @@
 - name: Check if yay is installed
   command: pacman -Q yay
   register: yay_installed
+  ignore_errors: true
 
 - name: Clone yay Git repository
   git:

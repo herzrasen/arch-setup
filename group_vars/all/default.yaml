@@ -1,5 +1,5 @@
 device: /dev/sda
-chroot: /mnt
+chroot: ""
 pacstrap_packages:
   - base
   - base-devel

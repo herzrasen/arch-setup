@@ -10,4 +10,6 @@
       - npm
       - yarn
       - python
+      - ripgrep
+      - the_silver_searcher
     state: present
