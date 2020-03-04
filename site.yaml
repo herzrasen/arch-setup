@@ -41,6 +41,8 @@
       tags: bspwm
     - role: dotfiles
       tags: dotfiles
+    - role: ssh
+      tags: ssh
     - role: packages
       tags: packages
 

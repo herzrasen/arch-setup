@@ -1,0 +1,19 @@
+- name: Install openssh
+  pacman: 
+    name: openssh
+    state: present
+
+- name: Create .ssh directory
+  file:
+    path: "/home/{{ user }}/.ssh"
+    state: directory
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0700
+
+- name: Generate key pair
+  openssh_keypair: 
+    path: "/home/{{ user }}/.ssh/id_rsa"
+  become: yes
+  become_user: "{{ user }}"
+
