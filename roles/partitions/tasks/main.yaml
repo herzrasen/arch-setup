@@ -3,7 +3,7 @@
     device: "{{ device }}"
     number: 1
     part_end: 512MiB
-    flags: [ boot, esp ]
+    flags: [ esp ]
     label: gpt
     state: present
 
@@ -12,31 +12,38 @@
     device: "{{ device }}"
     number: 2
     part_start: 512MiB
-    part_end: 480GiB
+    part_end: 450GiB
+    label: gpt
     state: present
 
 - name: Create swap partition
   parted: 
     device: "{{ device }}"
     number: 3
-    part_start: 480GiB
+    part_start: 450GiB
     part_end: 100%
+    label: gpt
     state: present
 
 - name: Create dos filesystem on {{ device }}1
   filesystem:
     dev: "{{ device }}1"
     fstype: vfat
+    force: yes
     opts: -F 32
 
 - name: Create ext4 filesystem on {{ device }}2
   filesystem:
     dev: "{{ device }}2"
+    force: yes
     fstype: ext4
 
-- name: Create swapfile on {{ device }}3
-  command: mkswap {{ device }}3
-
+- name: Create swap filesystem on {{ device }}3
+  filesystem:
+    dev: "{{ device }}3"
+    force: yes
+    fstype: swap
+    
 - name: Turn swap on
   command: swapon {{ device }}3
 
@@ -44,6 +51,7 @@
   mount:
     path: "{{ chroot }}"
     src: "{{ device }}2"
+    fstype: ext4
     state: mounted
 
 - name: Create {{ chroot }}/boot directory
@@ -56,4 +64,5 @@
   mount: 
     path: "{{ chroot }}/boot"
     src: "{{ device }}1"
+    fstype: vfat
     state: mounted

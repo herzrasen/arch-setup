@@ -2,6 +2,8 @@
   timezone:
     name: "{{ timezone }}"
     hwclock: UTC
+  become: yes
+  become_user: "{{ user }}"
 
 - name: Generate the locale
   locale_gen: 

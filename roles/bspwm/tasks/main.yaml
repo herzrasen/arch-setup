@@ -7,6 +7,7 @@
       - dunst
       - rofi
       - picom
+      - nitrogen
     state: present
 
 - name: Create .xinitrc
@@ -15,3 +16,20 @@
     dest: "/home/{{ user }}/.xinitrc"
   become: yes
   become_user: "{{ user }}"
+
+- name: Create the Pictures directory
+  file:
+    path: "/home/{{ user }}/Pictures"
+    state: directory
+    owner: "{{ user }}"
+    group: "{{ user }}"
+
+- name: Copy the wallpaper to /home/{{ user }}/Pictures
+  copy:
+    src: files/astronaut.jpg
+    dest: "/home/{{ user }}/Pictures"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+
+- name: Set the wallpaper
+  command: "nitrogen --set-scaled /home/{{ user }}/Pictures/astronaut.jpg --save"
