@@ -1,6 +1,9 @@
 - name: Install zsh
-  pacman:
-    name: zsh
+  yay:
+    name: 
+      - zsh
+      - zsh-completions
+      - zsh-syntax-highlighting
     state: present
 
 - name: Get zsh path
