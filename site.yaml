@@ -28,6 +28,8 @@
       tags: locale
     - role: user
       tags: user
+    - role: nvim
+      tags: nvim
     - role: yay
       tags: yay
     - role: reflector
