@@ -4,36 +4,12 @@
     dest: /etc/localtime
     state: link
 
-- name: Set the timezone
-  timezone:
-    name: "{{ timezone }}"
-    hwclock: UTC
-  become: yes
-  become_user: "{{ user }}"
-
 - name: Generate the locale
   locale_gen: 
     name: "{{ locale }}"
     state: present
 
-- name: Get the current locale
-  command: localectl status
-  register: locale_status
-  changed_when: false
-
-- name: Parse the current LANG from the configuration
-  set_fact:
-    current_locale: "{{ locale_status.stdout | regex_search('LANG=([^\n]+)', '\\1') | first }}"
-
-- name: Set locale to "{{ locale }}" 
-  command: localectl set-locale LANG="{{ locale }}"
-  when: current_locale != locale
-
-- name: Parse the current keymap from the configuration
-  set_fact:
-    current_keymap: "{{ locale_status.stdout | regex_search('VC Keymap: ([^\n]+)', '\\1') | first }}"
-
-- name: Set the keymap
-  command: localectl set-keymap {{ keymap }}
-  when: current_keymap != keymap 
-
+- name: Create keymap config
+  template: 
+    src: ../templates/vconsole.conf.j2
+    dest: /etc/vconsole.conf

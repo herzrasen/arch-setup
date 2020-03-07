@@ -6,6 +6,8 @@ pacstrap_packages:
   - linux 
   - linux-firmware
   - neovim
+  - ansible
+  - git
 user: dennis
 password_hash: $6$0AuFWepifSr$GhVGkpUvm4kOgAgkJf2wNlfDeznF3jXxtsag/kwM5LJgA5tleBJpMtmS.lIHTY8ccAXBTJMyqS0xqZEP4oqso1
 hostname: greenwell

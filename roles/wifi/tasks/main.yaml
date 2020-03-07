@@ -1,6 +1,8 @@
 - name: Install connman
   pacman:
-    name: connman
+    name: 
+      - connman
+      - wpa_supplicant
 
 - name: Enable connman
   systemd:

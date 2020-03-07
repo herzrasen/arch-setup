@@ -1,6 +1,7 @@
 - name: Install additional packages
   yay:
     name:
+      - termite
       - pkghist-bin
       - firefox
       - tldr
