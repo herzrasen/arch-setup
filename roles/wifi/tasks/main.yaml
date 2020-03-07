@@ -1,0 +1,9 @@
+- name: Install connman
+  pacman:
+    name: connman
+
+- name: Enable connman
+  systemd:
+    name: connman
+    enabled: yes
+    state: started

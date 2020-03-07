@@ -28,6 +28,8 @@
       tags: locale
     - role: user
       tags: user
+    - role: wifi
+      tags: wifi
     - role: nvim
       tags: nvim
     - role: yay

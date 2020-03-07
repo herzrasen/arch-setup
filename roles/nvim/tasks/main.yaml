@@ -1,0 +1,15 @@
+- name: Install nvim
+  yay:
+    name: 
+      - neovim
+      - ripgrep
+      - nodejs
+      - npm
+      - yarn
+    state: present
+
+- name: Create symlink for vim
+  file:
+    src: /usr/bin/nvim
+    dest: /usr/bin/vim
+    state: link
