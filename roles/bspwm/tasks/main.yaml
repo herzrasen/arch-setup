@@ -32,4 +32,4 @@
     group: "{{ user }}"
 
 - name: Set the wallpaper
-  command: "nitrogen --set-scaled /home/{{ user }}/Pictures/astronaut.jpg --save"
+  command: "nitrogen --save --set-scaled /home/{{ user }}/Pictures/astronaut.jpg"
