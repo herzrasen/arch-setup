@@ -1,4 +1,10 @@
 - name: Set the timezone
+  file:
+    src: "/usr/share/zoneinfo/{{ timezone }}"
+    dest: /etc/localtime
+    state: link
+
+- name: Set the timezone
   timezone:
     name: "{{ timezone }}"
     hwclock: UTC
